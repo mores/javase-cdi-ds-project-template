@@ -21,7 +21,7 @@ package org.os890.cdi.template;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class ApplicationScopedBean
+public class ApplicationScopedBean implements BeanInterface
 {
     public Integer getValue()
     {

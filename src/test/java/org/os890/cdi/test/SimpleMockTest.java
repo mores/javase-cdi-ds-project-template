@@ -24,6 +24,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.os890.cdi.template.ApplicationScopedBean;
+import org.os890.cdi.template.BeanInterface;
 
 import javax.inject.Inject;
 
@@ -33,7 +34,7 @@ import static org.mockito.Mockito.*;
 public class SimpleMockTest
 {
     @Inject
-    private ApplicationScopedBean applicationScopedBean;
+    private BeanInterface applicationScopedBean;
 
     @Inject
     private DynamicMockManager mockManager;
@@ -41,7 +42,7 @@ public class SimpleMockTest
     @Test
     public void injectionTest()
     {
-        ApplicationScopedBean applicationScopedBean = mock(ApplicationScopedBean.class);
+        BeanInterface applicationScopedBean = mock(BeanInterface.class);
         when(applicationScopedBean.getValue()).thenReturn(7);
         mockManager.addMock(applicationScopedBean);
 
