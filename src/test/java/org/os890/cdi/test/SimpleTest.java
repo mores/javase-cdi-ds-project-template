@@ -19,20 +19,16 @@
 package org.os890.cdi.test;
 
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
-import org.apache.deltaspike.testcontrol.api.mock.DynamicMockManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.os890.cdi.template.ApplicationScopedBean;
 import org.os890.cdi.template.ConsumesBeans;
-import org.os890.cdi.template.DependentBean;
 
 import javax.inject.Inject;
 
-import static org.mockito.Mockito.*;
-
 @RunWith(CdiTestRunner.class)
-public class SimpleMockTest
+public class SimpleTest
 {
     @Inject
     private ConsumesBeans consumesBeans;
@@ -40,27 +36,9 @@ public class SimpleMockTest
     @Inject
     private ApplicationScopedBean applicationScopedBean;
 
-    @Inject
-    private DependentBean dependentBean;
-
-    @Inject
-    private DynamicMockManager mockManager;
-
     @Test
     public void injectionTest()
     {
-        applicationScopedBean = mock(ApplicationScopedBean.class);
-        when(applicationScopedBean.getValue()).thenReturn(7);
-        mockManager.addMock(applicationScopedBean);
-
-        Assert.assertEquals(new Integer(7), this.applicationScopedBean.getValue());
-
-        dependentBean = mock(DependentBean.class);
-        when(dependentBean.getValue()).thenReturn(3);
-        mockManager.addMock(dependentBean);
-
-        Assert.assertEquals(new Integer(3), this.dependentBean.getValue());
-
-        Assert.assertEquals(new Integer(21), this.consumesBeans.multiply());
+        Assert.assertEquals(new Integer(28), this.consumesBeans.multiply());
     }
 }
