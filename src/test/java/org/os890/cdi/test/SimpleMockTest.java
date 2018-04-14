@@ -35,9 +35,6 @@ import static org.mockito.Mockito.*;
 public class SimpleMockTest
 {
     @Inject
-    private ConsumesBeans consumesBeans;
-
-    @Inject
     private ApplicationScopedBean applicationScopedBean;
 
     @Inject
@@ -57,10 +54,12 @@ public class SimpleMockTest
 
         dependentBean = mock(DependentBean.class);
         when(dependentBean.getValue()).thenReturn(3);
-        mockManager.addMock(dependentBean);
+        mockManager.addMock(dependentBean, new org.apache.deltaspike.core.api.literal.NamedLiteral());
 
         Assert.assertEquals(new Integer(3), this.dependentBean.getValue());
 
-        Assert.assertEquals(new Integer(21), this.consumesBeans.multiply());
+	ConsumesBeans consumesBeans = org.apache.deltaspike.core.api.provider.BeanProvider.getContextualReference( ConsumesBeans.class );
+
+        Assert.assertEquals(new Integer(21), consumesBeans.multiply() );
     }
 }
